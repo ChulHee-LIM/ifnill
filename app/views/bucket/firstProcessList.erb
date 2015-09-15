@@ -7,7 +7,8 @@
             <% @first_buckets.each do |bucket| %>
                 <div class="col-sm-4 col-md-4 col-lg-4 thumbnail each_list_container">
                     <div>
-                        <a href="/bucket/projectdetail/<%= bucket.id %>"><img src="<%= bucket.thumbnail.url %>"></a>
+                        <a href="/bucket/projectdetail/<%= bucket.id %>">
+                            <img src="<% unless bucket.thumbnail.url.nil? %><%= bucket.thumbnail.url %><%else%><%= image_url('default_image.png')%><%end%>"></a>
                         <hr style="margin:8px 0px">
                         <div>
                             <div>

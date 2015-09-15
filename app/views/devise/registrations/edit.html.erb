@@ -1,39 +1,44 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<div class="container visible">
+   <div class="devise-container">
+       <div class="row">
+         <div class="col-sm-3"></div>
+         <div class="col-sm-6">
+            <h2>Edit <%= resource_name.to_s.humanize %></h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= devise_error_messages! %>
+            <%= bootstrap_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+              <%= devise_error_messages! %>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
-  </div>
+               <% if current_user.profile.url.nil? %>
+                  <img src="<%= image_url('default_image.png')%>">
+               <% else %>
+                  <img src="<%=current_user.profile.url%>">
+               <% end %>
 
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
+               <%= f.file_field :image, label:"프로필 사진 변경" %>
 
-  <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
+                <div class="form-group">
+                  <label>이름</label>
+                  <input class="form-control" type="text" value="<%=current_user.name%>" disabled>
+               </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
+               <%= f.email_field :email, autofocus: true %>
+               <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+                  <div>현재 이메일 인증을 확인중입니다.: <%= resource.unconfirmed_email %></div>
+               <% end %>
+               
+               <%= f.password_field :password, autocomplete: "off", label: "변경 비밀번호" %>
+               <%= f.password_field :password_confirmation, autocomplete: "off", label: "변경 비밀번호 확인" %>
+               <%= f.password_field :current_password, autocomplete: "off", label: "현재 비밀번호 확인" %>
 
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "off" %>
-  </div>
 
-  <div class="actions">
-    <%= f.submit "Update" %>
-  </div>
-<% end %>
+               <div align="center">
+                  <button type="submit"class="btn btn-default">변경</button>
+                  <a href="<%registration_path(resource_name)%>" class="btn btn-default" data-confirm="정말 탈퇴 하시겠습니까?">탈퇴</a>
+               </div>
+            <% end %>
 
-<h3>Cancel my account</h3>
-
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
-
-<%= link_to "Back", :back %>
+            <%= link_to "Back", :back %>
+         </div>
+      </div>   
+   </div>
+</div>

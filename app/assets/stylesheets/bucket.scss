@@ -58,12 +58,32 @@ button.close {
     padding-bottom: 17px;
 }
 
-
 .each_list_container {
-  width: 32.333%;
-  margin-left: 0.5%;
-  margin-right: 0.5%
+  width: 100%;
+  margin-left: 1%;
+  margin-right: 1%
 }
+
+
+@media (min-width: 768px) {
+  .each_list_container {
+    width: 48%;
+    margin-left: 1%;
+    margin-right: 1%
+  }
+}
+
+@media (min-width: 992px) {
+  .each_list_container {
+    width: 32.333%;
+    margin-left: 0.5%;
+    margin-right: 0.5%
+    
+  }
+}
+
+
+
 
 .each_list_tag {
   margin-top: 10px
@@ -346,7 +366,6 @@ a:hover, a:focus {
   
 
 }
-
 
 
 .detail_img_container {
