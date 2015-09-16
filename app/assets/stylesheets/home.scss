@@ -114,7 +114,7 @@ body {
 ------------------------- */
 
 .featurette-divider {
-  margin: 80px 0; /* Space out the Bootstrap <hr> more */
+  margin: 40px 0; /* Space out the Bootstrap <hr> more */
 }
 
 /* Thin out the marketing headings */
@@ -185,7 +185,8 @@ body {
 }
 
 .p_tag {
-  font-weight: 500;
+  font-weight: normal;
+  color: #777;
  }
 
  .featurette {

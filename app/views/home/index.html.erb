@@ -34,14 +34,17 @@
         <!--<img class="featurette-image img-responsive center-block" src="" alt="Generic placeholder image">-->
         </div>
         <div class="col-md-7 col-md-pull-5">
-          <h2>ifnill을 소개합니다.</h2>
-          <h4>ifnill은 버킷리스트 실현을 돕는 서비스에요!</h4><br><br>       
-          <a class="a_tag" href="#ifer">ifer</a>가 버킷리스트를 이룰 때 필요한 물품을 이포켓에 담으면,<br> 
-          <a class="a_tag" href="#fuller">fuller</a>들이 물품을 채워 버킷리스트를 이룰 수 있게 도와줘요.<br><br>
-          버킷리스트라고 해서 엄청난 일만 올릴 필요는 없어요.<br> 
-          하루 종일 잠자기, 스카이다이빙 하기, 할머니와의 일본 온천여행 등등등.<br><br>
-          아주 작은 일에서부터 크게 느껴지는 모든 일.<br> 생각하는 모든 일, 해보고 싶었던 일들을<br> ifnill에서 이루세요.
-          </p>
+            <img src="<%= image_url('what_is_ifnill.png')%>" width="110" height="110">
+
+            <h2>ifnill을 소개합니다.</h2>
+            <h4>ifnill은 버킷리스트 실현을 돕는 서비스에요!</h4><br><br>
+          <p class="p_tag">     
+            <a class="a_tag" href="#ifer">ifer</a>가 버킷리스트를 이룰 때 필요한 물품을 이포켓에 담으면,<br> 
+            <a class="a_tag" href="#fuller">fuller</a>들이 물품을 채워 버킷리스트를 이룰 수 있게 도와줘요.<br><br>
+            버킷리스트라고 해서 엄청난 일만 올릴 필요는 없어요.<br> 
+            하루 종일 잠자기, 스카이다이빙 하기, 할머니와의 일본 온천여행 등등등.<br><br>
+            아주 작은 일에서부터 크게 느껴지는 모든 일.<br> 생각하는 모든 일, 해보고 싶었던 일들을<br> ifnill에서 이루세요.
+          </p>  
         </div>
     </div>
 <!--ifnill소개 끝-->
@@ -49,6 +52,7 @@
     <hr class="featurette-divider">
     <div class="row featurette">
         <div class="col-md-7 col-md-push-5 basic" id="ifer">
+          <img src="<%= image_url('ifer.png')%>" width="110" height="110">
           <h2>ifer</h2>
           <h4>ifer는 버킷리스트를 등록하는 이용자에요.</h4>
           <h4>이포켓에 필요한 물품을 등록하고, 버킷리스트를 실현시키죠.</h4><br>
@@ -73,6 +77,8 @@
         <!--<img class="featurette-image img-responsive center-block" src="" alt="Generic placeholder image">-->
         </div>
         <div class="col-md-7 col-md-pull-5 basic">
+          <img src="<%= image_url('fuller.png')%>" width="110" height="110">
+
           <h2>fuller</h2>
           <h4>fuller는 이퍼의 버킷리스트를 보고, 이포켓을 채워주는 후원자에요.</h4>
           <p class="p_tag">
@@ -89,8 +95,9 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-4 basic">
+              <img src="<%= image_url('step_1.png')%>" width="110" height="110">
+
               <h1>1단계</h1>
-              <div class="imageContainer img-circle" alt="Generic placeholder image"></div>
               <p class="p_tag">
               ifer: 버킷리스트와 이포켓을 등록<br><br>
               fuller: ifer의 이포켓의 물품을 지원
@@ -98,8 +105,8 @@
             </div>
             
             <div class="col-lg-4 basic">
+            <img src="<%= image_url('step_2.png')%>" width="110" height="110">
               <h1>2단계</h1>
-              <div class="imageContainer img-circle" alt="Generic placeholder image"></div>
               <p class="p_tag">
               ifer: 설정이 기간 지난 후, 버킷리스트를 실행<br>
               ifnill의 미션을 받고, 지원받은 fuller의 물품을 이용해서 버킷리스트를 수행과정 업로드<br><br>
@@ -108,8 +115,8 @@
             </div>
             
             <div class="col-lg-4 basic">
+            <img src="<%= image_url('step_3.png')%>" width="110" height="110">
               <h1>3단계</h1>
-              <div class="imageContainer img-circle" alt="Generic placeholder image"></div>
               <p class="p_tag">
               ifer: 버킷리스트 실현완료!<br>
               완료된 리스트를 통해 ifer가 실현한 ifnill의 미션을 확인
