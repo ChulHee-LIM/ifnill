@@ -1,0 +1,149 @@
+<div class="container bucket-container">
+  <div>
+    <h1 class="headline text-weight_300">
+       버킷 수정하기
+    </h1>
+  </div>
+      <form accept-charset="UTF-8" action="/bucket/modify_bucket/<%= @selected_bucket.id %>" class="new_project_request text-left" id="new_project_request" enctype="multipart/form-data" method="post">
+          <div class="each-form-single-line form-group form-group-lg">
+            <h3>버킷 이름</h3>
+              <input class="form-control input-lg" type="text" placeholder="Bucket's name" name="name" value="<%= @selected_bucket.name %>"><br>
+          </div>
+
+          <div class="each-form-single-line form-group form-group-lg">
+            <h3>한 줄 설명</h3>
+              <input class="form-control input-lg" type="text" placeholder="Explane in one line" name="intro_simple" value="<%= @selected_bucket.intro_simple %>">
+          </div>
+
+          <div class="each-form-single-line form-group form-group-lg">
+            <h3>대표 사진</h3>
+              <input type="file" name="thumbnail" accept="image/*">
+          </div>
+
+          <div class="each-form-single-line form-group form-group-lg">
+            <h3>버킷 소개</h3>
+                <textarea class="form-control" rows="11" placeholder="Introduce your bucket" name="intro_detail"><%= @selected_bucket.intro_detail %></textarea>
+          </div>
+
+
+        <div class="each-form-multi-line form-group form-group-lg">
+                  <h3>후원 받을 기간</h3>
+                  <div class="col-sm-6">
+                    <h4>시작일</h4>
+                    <div>
+                      <input class="form-control" id="dpd1" tpye="text" name="start_date" value="<%= @start_date %>">
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <h4>마감일</h4>
+                    <div>
+                      <input class="form-control" id="dpd2" tpye="text" name="finish_date" value="<%= @finish_date %>">
+                    </div>
+                  </div>
+        </div>
+
+          <div class="each-form-multi-line form-group form-group-lg" style="margin-bottom:100px">
+            <h3>후원 희망 물품<button type="button" class="btn btn-info btn-xs add-item"> + </button> <button type="button" class="btn btn-warning btn-xs del-item"> - </button> </h3>
+            <input type="text" id="item-count" name="item_count" hidden="true" value="<%= @selected_bucket.items.where(:state => 0).count %>">
+
+                  <div class="item-wrapper">
+                    <div>
+                      <div class="form-group col-sm-3">
+                        <h4>물품</h4>
+                      </div>
+                      <div class="form-group col-sm-9">
+                        <h4>설명</h4>
+                      </div>
+                    </div>
+
+                    <% x=1 %>
+                    <% @selected_bucket.items.where(:state => 0).each do |item| %>
+                    
+                    <div>
+                      <div class="form-group col-sm-3">
+                        <input class="form-control item-input" id="item-<%= x.to_s %>" type="text" name="item_<%=x.to_s%>" value="<%= item.name %>">
+                      </div>
+                      <div class="form-group col-sm-9">
+                        <input class="form-control item-input" type="text" name="item_<%=x.to_s%>_intro" value="<%= item.intro %>">
+                      </div>
+                    </div>
+                    <% x+=1 %>
+                    <% end %>
+
+
+                  </div>
+              </div>
+          <div>
+            <input class="btn btn-primary btn-lg col-xs-12 col-sm-12 col-md-12 col-lg-12" type="submit" value="생성하기" id="submit_button">
+          </div>
+      </form> 
+</div>
+
+
+
+
+<script type="text/javascript">
+  
+  $(document).ready(function() {
+      var max_fields      = 12; //maximum input boxes allowed
+      var wrapper          = $(".item-wrapper"); //Fields wrapper
+      var add_button      = $(".add-item"); //Add button ID
+      var del_button      = $(".del-item");
+
+      var x = $('#item-count').val();
+      $(add_button).click(function(e){ //on add input button click
+          e.preventDefault();
+          if(x < max_fields){ //max input box allowed
+              x++; //text box increment
+              $('#item-count').val(x);
+              $(wrapper).append('<div><div class="form-group col-sm-3"><input class="form-control item-input" id="item-'+x+'" name="item_'+x+'"></input></div><div class="form-group col-sm-9"><input class="form-control item-input" name="item_'+x+'_intro"></input></div></div>'); //add input box
+          } else {
+            alert('최대 12개까지 등록 가능합니다.');
+          }
+      });
+
+      $(del_button).click(function(e){ //on add input button click
+          e.preventDefault();
+          if(x > 1){ //max input box allowed
+               //text box increment
+               $('#item-'+x.toString()).parent('div').parent('div').remove();
+
+              x--;
+              $('#item-count').val(x);
+          } else {
+            alert('최소 1개 이상 등록해야 합니다.');
+          }
+      });
+
+
+      /* datepicker */
+      
+      var nowTemp = new Date();
+      var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
+       
+      var checkin = $('#dpd1').datepicker({
+        onRender: function(date) {
+          return date.valueOf() < now.valueOf() ? 'disabled' : '';
+        }
+      }).on('changeDate', function(ev) {
+        if (ev.date.valueOf() > checkout.date.valueOf()) {
+          var newDate = new Date(ev.date)
+          newDate.setDate(newDate.getDate() + 1);
+          checkout.setValue(newDate);
+        }
+        checkin.hide();
+        $('#dpd2')[0].focus();
+      }).data('datepicker');
+      var checkout = $('#dpd2').datepicker({
+        onRender: function(date) {
+          return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
+        }
+      }).on('changeDate', function(ev) {
+        checkout.hide();
+      }).data('datepicker');
+
+
+      
+  });
+
+</script>
