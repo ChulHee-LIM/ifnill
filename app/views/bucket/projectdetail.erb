@@ -3,8 +3,8 @@
 
       <div class="row detail_top_info">
         <div class="col-lg-4">
-          <img class="img-circle" src="<% unless User.find(@selected_bucket.user_id).profile.nil? %> <%= User.find(@selected_bucket.user_id).profile %> <% else %> <%= image_url('default_image.png')%><%end%> " alt="Generic placeholder image" width="140" height="140">
-          <h4><%= User.find(@selected_bucket.user_id).name %></h4>
+          <img class="img-circle" src="<% unless @selected_bucket.user.profile.nil? %> <%= @selected_bucket.user.profile %> <% else %> <%= image_url('default_image.png')%><%end%> " alt="Generic placeholder image" width="140" height="140">
+          <h4><%= @selected_bucket.user.name %></h4>
         </div>
         <div class="col-lg-6">
           <h2><%= @selected_bucket.name %></h2>

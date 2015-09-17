@@ -4,6 +4,8 @@ class Bucket < ActiveRecord::Base
 
 	mount_uploader :thumbnail, BucketImageUploader
 
+	belongs_to :user
+
 	has_many :items
 	has_many :supports
 	has_many :replies
