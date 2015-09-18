@@ -168,6 +168,38 @@ p.copyright {
 }
 
 
+/* alert CSS */
+
+.alert {
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+.alert-alert {
+  background-color: #f2dede;
+  border-color: #eed3d7;
+  color: #b94a48;
+}
+.alert-alert hr {
+  border-top-color: #e6c1c7;
+}
+.alert-alert .alert-link {
+  color: #953b39;
+}
+.alert-notice {
+  background-color: #dff0d8;
+  border-color: #d6e9c6;
+  color: #468847;
+}
+.alert-notice hr {
+  border-top-color: #c9e2b3;
+}
+.alert-notice .alert-link {
+  color: #356635;
+}
+
+
+
 /* ifnill's Custom CSS */
 
 .navbar-default {
