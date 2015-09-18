@@ -3,16 +3,16 @@
         <h1>1단계</h1>
     </div>
     <div class="row">
-        <% unless @first_buckets.nil? %>
+        <% unless @first_buckets.empty? %>
             <% @first_buckets.each do |bucket| %>
                 <div class="col-sm-4 col-md-4 col-lg-4 thumbnail each_list_container">
                     <div>
                         <a href="/bucket/projectdetail/<%= bucket.id %>">
-                            <img src="<% unless bucket.thumbnail.url.nil? %><%= bucket.thumbnail.url %><%else%><%= image_url('default_image.png')%><%end%>"></a>
+                            <img src="<% unless bucket.thumbnail.url.nil? %><%= bucket.thumbnail.url %><%else%><%= image_url('default_image.png')%><%end%>" ></a>
                         <hr style="margin:8px 0px">
                         <div>
                             <div>
-                                <h4 class="col-sm-8">
+                                <h4 class="col-sm-8" style="text-align:left">
                                     <a href="/bucket/projectdetail/<%= bucket.id %>"><%= bucket.name %></a>
                                 </h4>
                                 <h4 class="col-sm-4">
@@ -20,8 +20,8 @@
                                 </h4>
                             </div>
                             <div>
-                                <h5 class="col-sm-8"><%= bucket.intro_simple %></h5>
-                                <h5 class="col-sm-4"><%= Time.diff(bucket.finish_date, bucket.start_date, '%d')[:diff]  %> 남음</h5>
+                                <h5 class="col-sm-8" style="text-align:left"><%= bucket.intro_simple %></h5>
+                                <h5 class="col-sm-4"><%= Time.diff(bucket.finish_date, Time.now.in_time_zone('Seoul').to_date, '%d')[:diff]  %> 남음</h5>
                             </div>
                         </div>
                         <div class="col-sm-12 each_list_tag">

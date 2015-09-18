@@ -3,7 +3,7 @@
         <h1>3단계</h1>
     </div>
     <div class="row"> 
-        <% unless @final_buckets.nil? %>
+        <% unless @final_buckets.empty? %>
             <% @final_buckets.each do |bucket| %>
                 <div class="col-sm-4 col-lg-4 col-md-4">
                     <div class="thumbnail">
@@ -12,10 +12,10 @@
                         </div>
                         <div class="caption">
                             <h4 class="pull-right"><%= ((bucket.items.where(:state => 2).count.to_f / bucket.items.count.to_f)*100).round(1) %> %</h4>
-                            <h4><a href="https://youtu.be/o_1aF54DO60"><%= bucket.name %></a>
+                            <h4><a href="https://youtu.be/o_1aF54DO60" style="text-align:left"><%= bucket.name %></a>
                             </h4>
                             <p>
-                                <span><%= bucket.intro_simple %><span>
+                                <span style="text-align:left"><%= bucket.intro_simple %><span>
                                 <span class="pull-right">완료!</span>
                             </p>
                         </div>
