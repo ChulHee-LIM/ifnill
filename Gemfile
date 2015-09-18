@@ -1,5 +1,9 @@
 source 'https://rubygems.org'
 
+
+gem 'devise-i18n'
+gem 'rails-i18n'
+
 gem 'bootstrap_form'
 gem 'bootstrap-sass', '~> 3.2.0'
 gem 'autoprefixer-rails'
@@ -15,7 +19,9 @@ gem 'fog'
 
 gem 'time_diff'
 
-gem 'fastimage_resize'
+gem 'mini_magick'
+
+#gem 'fastimage_resize'
 # apt-get install libgd2-xpm-dev
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -34,7 +40,7 @@ gem 'therubyracer', platforms: :ruby
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks'
+#gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
