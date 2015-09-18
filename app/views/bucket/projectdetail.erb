@@ -3,7 +3,7 @@
 
       <div class="row detail_top_info">
         <div class="col-lg-4">
-          <img class="img-circle" src="<% unless @selected_bucket.user.profile.nil? %> <%= @selected_bucket.user.profile %> <% else %> <%= image_url('default_image.png')%><%end%> " alt="Generic placeholder image" width="140" height="140">
+          <img class="img-circle" src="<% unless @selected_bucket.user.profile.nil? %><%= @selected_bucket.user.profile %><% else %> <%= image_url('default_image.png')%> <% end %>" alt="Generic placeholder image" width="140" height="140">
           <h4><%= @selected_bucket.user.name %></h4>
         </div>
         <div class="col-lg-6">
@@ -13,12 +13,17 @@
             <h3><%= ((@selected_bucket.items.where(:state => 2).count.to_f / @selected_bucket.items.count.to_f)*100).round(1) %> %</h3>
           </div>
           <div class="col-lg-6">
-            <h3><%= Time.diff(@selected_bucket.finish_date, @selected_bucket.start_date, '%d')[:diff]  %> 남음</h3>
+            <h3><%= Time.diff(@selected_bucket.finish_date, Time.now.in_time_zone('Seoul').to_date, '%d')[:diff]  %> 남음</h3>
             <h6><%= @selected_bucket.start_date %> ~ <%= @selected_bucket.finish_date %></h6>
           </div>
         </div>
         <div class="col-lg-2">
-          <!-- empty-->
+          <% unless current_user.nil? %>
+            <% if @selected_bucket.user_id == current_user.id %>
+              <a class="btn btn-lg btn-primary" href="/bucket/modify/<%= @selected_bucket.id %>">수정</a>
+              <a class="btn btn-lg btn-danger" href="/bucket/delete_bucket/<%= @selected_bucket.id %>">삭제</a>
+            <% end %>
+          <% end %>
         </div>
       </div>
     </div>
@@ -124,25 +129,46 @@
           <div style="padding:10px 0px 50px">
             <div class="col-sm-3" style="text-align:left"><h4><%= item.name %></h4> </div>
             <div class="col-sm-6" style="text-align:left"><h4><%= item.intro %></h4></div>
-            <div class="col-sm-3" style="text-align:left"><h4><% if item.support!=nil %> <%= User.find(item.support.user_id).name %> <% else %> - <% end %></h4> </div>
+            <div class="col-sm-3" style="text-align:left"><h4><% if item.support!=nil %> <%= item.support.user.name %> <% else %> - <% end %></h4> </div>
            </div>      
       <% end %>
     </div>
 
-
     <div class="container marketing">
       <hr>
       <div class="col-md-12">
-        <h3 style="text-align:left"><%= @selected_bucket.replies.count %>개의 댓글이 있어요. <button type="submit" class="btn btn-primary btn-lg">등록하기</button></h3>
-        <textarea class="form-control" rows="3" cols="auto"></textarea>
-      </div>
-     
-      <div class="col-md-12">
-          <% @selected_bucket.replies.each do |reply| %>
-            <hr>
-            <h3><span class="label label-info" style="text-align:left"><%= reply.user_id %></span></h3>
-            <p><%= reply.context %></p>
+          <%= form_tag "/bucket/write_comment", method: "post" do %>
+
+          <h3 style="text-align:left"><%= @selected_bucket.replies.count %>개의 댓글이 있어요. <button type="submit" class="btn btn-primary btn-lg">등록하기</button></h3>
+          <input type="hidden" name="bucket_id" value="<%= @selected_bucket.id %>">
+            <% if user_signed_in? %>
+            <textarea class="form-control" rows="3" cols="auto" name="msg"></textarea>
+            <br>
+            <% else %>
+            <textarea class="form-control" placeholder="로그인 후 댓글을 남길 수 있습니다." rows="3" cols="auto" readonly="readonly"></textarea>
+            <% end %>
           <% end %>
-      </div>
+        </div>
+
+        <% @selected_bucket.replies.each do |reply| %>
+            <hr class="col-lg-12" style="padding:0px;margin:0px">
+            <div class="col-lg-12">
+              <div class="col-lg-9" style="text-align:left; margin:20px 0px;">
+                <h4><%= reply.user.name %></h4>
+                <p style="font-size:20px"><%= reply.context %></p>
+              </div>
+              <div class="col-lg-3" style="text-align:right; margin:20px 0px;">
+                  <p><%= reply.updated_at.in_time_zone(9).strftime("%Y/%m/%d \n %a %p %I:%M:%S")%></p>
+                  <% if user_signed_in? %>
+                    <% if reply.user_id == current_user.id %>
+                      <%= form_tag "/bucket/del_comment", method: "post" do %>
+                      <input type="hidden" name="reply_id" value="<%= reply.id %>">
+                      <button type="submit" class="btn btn-danger" style="float:right">X</button>
+                    <% end %>
+                  <% end %>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
     </div>
 </div>

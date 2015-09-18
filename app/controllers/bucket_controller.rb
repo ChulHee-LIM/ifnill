@@ -33,6 +33,19 @@ class BucketController < ApplicationController
         @selected_bucket=Bucket.find(params[:id])
     end
 
+     def write_comment
+        Reply.create(user_id: current_user.id,
+                      bucket_id: params[:bucket_id].to_i,
+                      context: params[:msg])
+        redirect_to :back
+    end
+    
+    def del_comment
+        Reply.find(params[:reply_id]).destroy
+        redirect_to :back
+    end
+
+
 
     def create_bucket
 
@@ -44,14 +57,15 @@ class BucketController < ApplicationController
         bucket.intro_simple=params[:intro_simple]
         bucket.intro_detail=params[:intro_detail]
 
-        #if (params[:thumbnail]!=nil)
-        #  bucket.thumbnail = params[:thumbnail]
-        #end
-
         if (params[:thumbnail]!=nil)
-            outfile = FastImage.resize(params[:thumbnail], 500, 500)            
-            bucket.thumbnail = outfile
+          bucket.thumbnail = params[:thumbnail]
         end
+
+        ## fastImage
+        # if (params[:thumbnail]!=nil)
+        #     outfile = FastImage.resize(params[:thumbnail], 500, 500)            
+        #     bucket.thumbnail = outfile
+        # end
         
         bucket.start_date=convert_date(params[:start_date])
         bucket.finish_date=convert_date(params[:finish_date])
@@ -164,6 +178,19 @@ class BucketController < ApplicationController
         redirect_to "/bucket/projectdetail/#{bucket.id}"
 
 
+    end
+
+    def delete_bucket
+        one_bucket = Bucket.find(params[:id])
+        #state값 받아서 redirect할때 state 값을 기준으로 다른 페이지로 보내자
+        if current_user.id == one_bucket.user_id
+            one_bucket.destroy
+            flash[:sucess] = "정상적으로 삭제되었습니다."
+            redirect_to "/bucket/projectList"
+        else
+            flash[:danger] = "권한이 없습니다."
+            redirect_to :back
+        end
     end
 
 
