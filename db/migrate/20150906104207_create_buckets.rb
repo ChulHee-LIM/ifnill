@@ -5,10 +5,10 @@ class CreateBuckets < ActiveRecord::Migration
     	 t.integer :user_id
     	 t.string :name
     	 t.string :intro_simple
-    	 t.string :intro_detail
+    	 t.text :intro_detail
     	 t.date :start_date
     	 t.date :finish_date
-    	 t.string :thumbnail
+    	 t.text :thumbnail
     	 t.text :images
       t.string :contents_url
       t.integer :state
