@@ -16,9 +16,9 @@ ko:
       unconfirmed: "계속하기 전에 이메일 주소를 인증해야 합니다."
     mailer:
       confirmation_instructions:
-        subject: "이메일 인증 지침"
+        subject: "ifnill.com 가입 인증 메일입니다."
       reset_password_instructions:
-        subject: "비밀번호 재설정 지침"
+        subject: "ifnill.com 비밀번호 재설정 메일입니다."
       unlock_instructions:
         subject: "잠금 해제 지침"
     omniauth_callbacks:
