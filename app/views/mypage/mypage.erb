@@ -5,7 +5,7 @@
                 <img class="img-circle" src="<% unless @user_info.profile.nil? %> <%= @user_info.profile.url %> 
                                           <% else %> <%= image_url('default_image.png')%>
                                           <%end%> " alt="Generic placeholder image" width="140" height="140">
-                <br><a href="/users/edit"  type="button" style="line-height: 16px; padding: 5px 17px; text-align:right; margin-bottom:25p" class="btn btn-default">프로필 편집</a>
+                <br><br><a href="/users/edit"  type="button" style="line-height: 16px; padding: 5px 17px; text-align:right; margin-bottom:25p" class="btn btn-default">프로필 편집</a>
             
             </div>
         <div class="col-lg-6">
@@ -36,7 +36,7 @@
   <div style="margin-top: 63px;">
   <div class="container bucket-container">
     <div class="row">
-        <% unless @user_mybuckets.nil? %>
+        <% unless @user_mybuckets.empty? %>
             <% @user_mybuckets.each do |bucket| %>
                 <div class="col-sm-4 col-md-4 col-lg-4 thumbnail each_list_container">
                     <div>
@@ -92,7 +92,7 @@
   <div style="margin-top: 63px;">
   <div class="container bucket-container">
     <div class="row">
-        <% unless @user_info.supports.count == 0 %>
+        <% unless @user_info.supports.empty? %>
             <% @user_info.supports.each do |support| %>
                 <div class="col-sm-4 col-md-4 col-lg-4 thumbnail each_list_container">
                     <div>
@@ -126,7 +126,7 @@
         <% else %>
             <div  class="bucket-main">
                 <p class="lead">200개의 회사가 ifer를 후원하고 있습니다.</p>
-                <p><a class="btn btn-lg btn-primary" href="/bucket/make_bucket" role="button">프로젝트 후원하러 가기</a></p>
+                <p><a class="btn btn-lg btn-primary" href="/bucket/firstProcessList" role="button">프로젝트 후원하러 가기</a></p>
             </div>
         <% end %>
     </div>
