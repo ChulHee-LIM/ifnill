@@ -8,14 +8,14 @@
                     <h3>꿈을 이루세요! 꿈을 이뤄보세요
                     ! 꿈은 이루어진다!</h3>
                     <hr class="intro-divider">
-                    <form class="form-horizontal">
+                    <form class="form-horizontal" action="/bucket/make_bucket">
                       <div class="form-group form-group-lg">
                           <div class="col-sm-3">
                           </div>
                           <div class="col-sm-6">
                             <input class="form-control" type="text" id="formGroupInputLarge" placeholder="어떤 꿈을 가지고 있나요?" name="main_title_input"><br>
                             <p>
-                              <a  href="/bucket/make_bucket" type="button" class="btn btn-primary btn-lg">버킷리스트 올리기</a>
+                              <input type="submit" class="btn btn-primary btn-lg" value="버킷리스트 올리기"></input>
                             </p>
                           </div>
                           <div class="col-sm-3">
@@ -26,6 +26,7 @@
             </div>
         </div>
     </div>
+     <div id="startchange"></div> 
 </div>
 <!--메인 페이지 끝-->
 <!--ifnill소개 시작-->
@@ -127,3 +128,27 @@
     <div class="featurette-divider"></div>
 <!--단계소개 끝-->    
 </div>
+
+<script>  
+   $(document).ready(function(){       
+      var mq = window.matchMedia( "(min-width: 768px)" );
+      var scroll_start = 0;
+      var startchange = $('#startchange');
+      var offset = startchange.offset();
+      if (startchange.length){
+         if (mq.matches) { // window width is at least 500px
+            $(document).scroll(function() { 
+               scroll_start = $(this).scrollTop();
+               if(scroll_start > offset.top) {
+                  $(".navbar-default").css('background-color', '#333');
+               } else {
+                $('.navbar-default').css('background-color', 'transparent');
+               }
+            });   
+         }
+         else {// window width is less than 500px
+            $(".navbar-default").css('background-color', '#333');
+         }
+      }
+   });
+</script>
