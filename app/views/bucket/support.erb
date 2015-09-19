@@ -1,39 +1,55 @@
-<div style="padding-top:63px">
-  <div style="text-align:center; padding-top:30px">
-    <div class="container">
-      <div class="row">
-          <div class="col-lg-4">
-            <img class="img-circle" src="http://file2.instiz.net/data/file/20150607/5/5/b/55bdb695fa1dad95940b0d9cbde29769.png" alt="Generic placeholder image" width="140" height="140">
-            <h3>은지보람</h3>
+<div class="container bucket-container">
+    <div class="marketing">
+
+      <div class="row detail_top_info">
+        <div class="col-lg-4">
+          <img class="img-circle" src="<% unless @selected_bucket.user.profile.url.nil? %> <%= @selected_bucket.user.profile.url %> <% else %> <%= image_url('default_image.png')%><%end%> " alt="Generic placeholder image" width="140" height="140">
+          <h4><%= User.find(@selected_bucket.user_id).name %></h4>
+        </div>
+        <div class="col-lg-6">
+          <h2><%= @selected_bucket.name %></h2>
+          <h4><%= @selected_bucket.intro_simple %></h4>
+          <div class="col-lg-6">
+            <h3><%= ((@selected_bucket.items.where(:state => 2).count.to_f / @selected_bucket.items.count.to_f)*100).round(1) %> %</h3>
           </div>
-          <div class="col-lg-5">
-            <h2>글레스톤베리 가기</h2>
-            <p>한국의 락을 알리고 오겠습니다.</p>
-            <div class="col-lg-3">
+          <div class="col-lg-6">
+            <h3><%= Time.diff(@selected_bucket.finish_date, @selected_bucket.start_date, '%d')[:diff]  %> 남음</h3>
+            <h6><%= @selected_bucket.start_date %> ~ <%= @selected_bucket.finish_date %></h6>
           </div>
         </div>
+        <div class="col-lg-2">
+          <!-- empty-->
+        </div>
       </div>
+    </div>
       <hr>
+     
+     <div class="container">
       <div style="padding:10px 0px 50px">
-          <div class="col-sm-4" style="text-align:left"><h3>후원 목록</h3> </div>
+          <div class="col-sm-3" style="text-align:left"><h3>후원 태그</h3> </div>
           <div class="col-sm-6" style="text-align:left"><h3>상세 설명</h3></div>
+          <div class="col-sm-3" style="text-align:left"><h3>후원하기</h3></div>
       </div>
       <hr>
-      <div style="padding:10px 0px 50px">
-          <div class="col-sm-4" style="text-align:left"><h4># 티켓</h4> </div>
-          <div class="col-sm-6" style="text-align:left"><h4> 미국가는 티켓 2015.05.08 출발</h4></div>
-          <input type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
+     <%= form_tag "/bucket/support_send/#{@selected_bucket.id}", method: "post" do %>
+        <% @selected_bucket.items.where(:state => 0).each do |item| %>
+            <div style="padding:10px 0px 50px">
+              <div class="col-sm-3" style="text-align:left"><h4><%= item.name %></h4> </div>
+              <div class="col-sm-6" style="text-align:left"><h4><%= item.intro %></h4></div>
+              <div class="col-sm-2" style="text-align:left">
+              <input type="checkbox" name="item_id[]" value="<%= item.id %>" >
+              </div>
+             </div>      
+        <% end %>
       </div>
-      <div style="padding:10px 0px 50px">
-          <div class="col-sm-4" style="text-align:left"><h4> # 배낭가방</h4> </div>
-          <div class="col-sm-6" style="text-align:left"><h4> 배낭여행 가는데 배낭가방이 없어요. 큰걸로~</h4></div>
-          <input type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
-      </div>
-      <hr>
-      <div>
-      <a  href="#" class="btn btn-primary btn-lg active" role="button">후원하기</a>
-      </div>
+      
+     
+     
+        <hr>
+        <div>
+        <input type="hidden" name="bucket_id" value="<%= @selected_bucket.id %>">
+          <input type="submit" class="btn btn-primary btn-lg active" role="button" value="후원하기"></input>
+        </div>
+      <% end %>
       <br>
     </div>
-  </div>
-</div>
