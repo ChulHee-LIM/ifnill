@@ -12,7 +12,7 @@
                         <hr style="margin:8px 0px">
                         <div>
                             <div>
-                                <h4 class="col-sm-8" style="text-align:left">
+                                <h4 class="col-sm-8">
                                     <a href="/bucket/projectdetail/<%= bucket.id %>"><%= bucket.name %></a>
                                 </h4>
                                 <h4 class="col-sm-4">
@@ -20,7 +20,7 @@
                                 </h4>
                             </div>
                             <div>
-                                <h5 class="col-sm-8" style="text-align:left"><%= bucket.intro_simple %></h5>
+                                <h5 class="col-sm-8"><%= bucket.intro_simple %></h5>
                                 <h5 class="col-sm-4"><%= Time.diff(bucket.finish_date, Time.now.in_time_zone('Seoul').to_date, '%d')[:diff]  %> 남음</h5>
                             </div>
                         </div>
