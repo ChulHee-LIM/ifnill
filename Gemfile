@@ -21,6 +21,8 @@ gem 'time_diff'
 
 gem 'mini_magick'
 
+gem 'mailgun_rails'
+
 #gem 'fastimage_resize'
 # apt-get install libgd2-xpm-dev
 

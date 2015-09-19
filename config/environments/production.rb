@@ -1,6 +1,13 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  config.action_mailer.default_url_options = { host: 'ifnill.com', port: 80 }
+  config.action_mailer.delivery_method = :mailgun
+  config.action_mailer.mailgun_settings = {
+        api_key: 'key-00fa1e9975618fadfd4dc8d8cf0b6295',
+        domain: 'ifnill.com'
+  }
+
   # Code is not reloaded between requests.
   config.cache_classes = true
 
@@ -76,4 +83,9 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  
+
+
+
 end
