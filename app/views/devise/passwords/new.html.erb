@@ -1,16 +1,20 @@
-<h2>Forgot your password?</h2>
-
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-  <%= devise_error_messages! %>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Send me reset password instructions" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+<div class="container visible">
+   <div class="devise-container">
+       <div class="row">
+         <div class="col-sm-3"></div>
+         <div class="col-sm-6">
+            <h2>Forgot Password</h2><br>
+			<%= bootstrap_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+			  <%= devise_error_messages! %>
+			  <div class="field">
+			    <%= f.email_field :email, autofocus: true %>
+			  </div>
+			  <div class="actions">
+			  	<button type="submit" class="btn btn-primary col-lg-12">비밀번호 변경</button><br>
+			  </div>
+			<% end %>
+			<%= render "devise/shared/links" %>
+         </div>
+      </div>   
+   </div>
+</div>
