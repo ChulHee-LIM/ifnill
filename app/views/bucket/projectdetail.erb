@@ -13,7 +13,7 @@
             <h3><%= ((@selected_bucket.items.where(:state => 2).count.to_f / @selected_bucket.items.count.to_f)*100).round(1) %> %</h3>
           </div>
           <div class="col-lg-6">
-            <h3><%= Time.diff(@selected_bucket.finish_date, Time.now.in_time_zone('Seoul').to_date, '%d')[:diff]  %> 남음</h3>
+            <h3><%= Time.diff(@selected_bucket.finish_date, Time.now.in_time_zone('Seoul').to_date, '%d') [:diff] %> 남음</h3>
             <h6><%= @selected_bucket.start_date %> ~ <%= @selected_bucket.finish_date %></h6>
           </div>
         </div>
@@ -21,7 +21,7 @@
           <% unless current_user.nil? %>
             <% if @selected_bucket.user_id == current_user.id %>
               <a class="btn btn-lg btn-primary" href="/bucket/modify/<%= @selected_bucket.id %>">수정</a>
-              <a class="btn btn-lg btn-danger" href="/bucket/delete_bucket/<%= @selected_bucket.id %>">삭제</a>
+              <a class="btn btn-lg btn-danger" href="/bucket/delete_bucket/<%= @selected_bucket.id %>"  data-confirm="정말로 삭제하시겠습니까?">삭제</a>
             <% end %>
           <% end %>
         </div>
@@ -71,7 +71,7 @@
         <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
 
           <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 detail_support_btn">
-            <a class="col-xs-12 col-sm-12 col-md-12 col-lg-12 btn btn-lg btn-primary" href="/bucket/support" role="button">후원하기</a>
+            <a class="col-xs-12 col-sm-12 col-md-12 col-lg-12 btn btn-lg btn-primary" href="/bucket/support/<%= @selected_bucket.id %>" role="button">후원하기</a>
           </div>
 
           <h4>후원이 필요해요!</h4>
@@ -162,13 +162,13 @@
                   <% if user_signed_in? %>
                     <% if reply.user_id == current_user.id %>
                       <%= form_tag "/bucket/del_comment", method: "post" do %>
-                      <input type="hidden" name="reply_id" value="<%= reply.id %>">
-                      <button type="submit" class="btn btn-danger" style="float:right">X</button>
+                        <input type="hidden" name="reply_id" value="<%= reply.id %>">
+                        <button type="submit" class="btn btn-danger" style="float:right">X</button>
+                      <% end %>
                     <% end %>
                   <% end %>
               </div>
             </div>
-          <% end %>
         <% end %>
     </div>
 </div>
